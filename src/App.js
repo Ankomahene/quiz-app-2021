@@ -1,12 +1,16 @@
 import React from 'react';
-import { ChakraProvider, Box, Text, theme } from '@chakra-ui/react';
+import { ChakraProvider, theme } from '@chakra-ui/react';
+import Header from './components/Header';
+import AppRouter from './router/AppRouter';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
 	return (
 		<ChakraProvider theme={theme}>
-			<Box>
-				<Text fontSize="4xl">QUIZ APP</Text>
-			</Box>
+			<Router>
+				<Header />
+				<AppRouter />
+			</Router>
 		</ChakraProvider>
 	);
 }
