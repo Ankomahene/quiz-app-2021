@@ -4,11 +4,12 @@ import CreatorDashboard from '../components/CreatorDashboard';
 import Login from '../components/Login';
 import QuizTaking from '../components/QuizTaking';
 import Signup from '../components/Signup';
+import CreateNewQuizPage from '../components/QuizCreation/CreateNewQuizPage';
 
 const AppRouter = () => {
 	return (
 		<Switch>
-			<Route path="/" exact="true">
+			<Route path="/" exact={true}>
 				<Home />
 			</Route>
 			<Route path="/login">
@@ -16,6 +17,9 @@ const AppRouter = () => {
 			</Route>
 			<Route path="/signup">
 				<Signup />
+			</Route>
+			<Route path="/create-quiz">
+				<CreateNewQuizPage />
 			</Route>
 			<Route path="/creator/:creatorId">
 				<CreatorDashboard />
