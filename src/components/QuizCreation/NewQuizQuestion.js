@@ -8,7 +8,7 @@ import { HiBadgeCheck } from 'react-icons/hi';
 import { CreateQuizContext } from '../../state/context/context';
 import { ActionType } from '../../const/action-types';
 
-const optionsLabels = {
+export const optionsLabels = {
 	alpha: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ],
 	roman: [ 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X' ]
 };

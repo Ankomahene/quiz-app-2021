@@ -1,18 +1,86 @@
-import { Box, Text, Flex, Progress } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Box, Button, Text, Flex, Progress } from '@chakra-ui/react';
+import { BsArrowRightShort } from 'react-icons/bs';
+import { optionsLabels } from './QuizCreation/NewQuizQuestion';
+
+const exampleQuiz = {
+	name: 'Sample Quiz Name',
+	description: 'Lorem ipsum dolor sit amet consecteted',
+	isPublished: true,
+	duration: '00:30:00',
+	points: '40',
+	questions: [
+		{
+			id: '1232',
+			questionText: 'Question 1 goes here',
+			optionsLabelType: 'alpha',
+			options: [
+				{
+					id: '3456232',
+					optionText: 'Option 1',
+					status: false
+				},
+				{
+					id: '7067323',
+					optionText: 'Option 2',
+					status: false
+				},
+				{
+					id: '6733329',
+					optionText: 'Option 3',
+					status: true
+				},
+				{
+					id: '123433',
+					optionText: 'Option 4',
+					status: false
+				}
+			]
+		},
+		{
+			questionText: 'Question 2 goes here',
+			optionsLabelType: 'alpha',
+			options: [
+				{
+					id: '456789',
+					optionText: 'Option 1',
+					status: false
+				},
+				{
+					id: '1000789',
+					optionText: 'Option 2',
+					status: true
+				},
+				{
+					id: '9886789',
+					optionText: 'Option 3',
+					status: false
+				},
+				{
+					id: '45632229',
+					optionText: 'Option 4',
+					status: false
+				}
+			]
+		}
+	]
+};
 
 const QuizTaking = () => {
+	const [ quiz ] = useState(exampleQuiz);
+	const [ currentQuestion, setCurrentQuestion ] = useState(0);
 	return (
 		<Flex alignItems="center" justifyContent="center" flexDir="column" h="92vh" bg="gray.100">
 			<Box>
 				<Text fontSize="2xl" my={2}>
-					Biology Quiz
+					{quiz.name}
 				</Text>
-				<Box shadow="base" bg="white" w="700px" h="500px" p={3}>
+				<Box shadow="base" bg="white" w="700px" h="540px" p={3}>
 					<Flex justifyContent="space-evenly">
 						<Flex alignItems="center" shadow="base" borderRadius="2xl" p={2}>
 							<Text>Time Left:</Text>
 							<Text fontSize="xl" color="cyan.500" mx={3} fontWeight="bold">
-								00:15:30
+								{quiz.duration}
 							</Text>
 						</Flex>
 						<Flex alignItems="center" shadow="base" borderRadius="2xl" p={2}>
@@ -24,6 +92,101 @@ const QuizTaking = () => {
 							</Text>
 						</Flex>
 					</Flex>
+					<Box bg="gray.50" p={3} m={5} h="120px" overflowY="auto">
+						{quiz.questions[currentQuestion].questionText}
+					</Box>
+					<Box w="600px" mx="auto" h="270px" px={2} overflowY="auto">
+						{quiz.questions[currentQuestion].options.map((option, index) => (
+							<Flex key={option.id} alignItems="center" my={3}>
+								<Text fontSize="lg" fontWeight="bold">
+									{optionsLabels[quiz.questions[currentQuestion].optionsLabelType][index]}
+								</Text>
+								<Text
+									p="6px"
+									w="550px"
+									ml={2}
+									border="1px"
+									borderRadius="base"
+									borderColor="cyan.400"
+									cursor="pointer"
+									_hover={{
+										backgroundColor: 'cyan.50',
+										color: 'gray.700'
+									}}
+								>
+									Lorem ipsum dolor sit amet consectetur adipis elit. Eaque veniam amet shjui
+								</Text>
+							</Flex>
+						))}
+
+						<Flex alignItems="center" my={3}>
+							<Text fontSize="lg" fontWeight="bold">
+								B
+							</Text>
+							<Text
+								p="6px"
+								w="550px"
+								ml={2}
+								border="1px"
+								bg="cyan.600"
+								color="white"
+								borderRadius="base"
+								borderColor="cyan.400"
+								cursor="pointer"
+								_hover={{
+									backgroundColor: 'cyan.50',
+									color: 'gray.700'
+								}}
+							>
+								Lorem ipsum dolor sit amet consectetur adipis elit.
+							</Text>
+						</Flex>
+						<Flex alignItems="center" my={3}>
+							<Text fontSize="lg" fontWeight="bold">
+								C
+							</Text>
+							<Text
+								p="6px"
+								w="550px"
+								ml={2}
+								border="1px"
+								borderRadius="base"
+								borderColor="cyan.400"
+								cursor="pointer"
+								_hover={{
+									backgroundColor: 'cyan.50',
+									color: 'gray.700'
+								}}
+							>
+								Lorem ipsum dolor sit amet consectetur adipis elit. Eaque
+							</Text>
+						</Flex>
+						<Flex alignItems="center" my={3}>
+							<Text fontSize="lg" fontWeight="bold">
+								D
+							</Text>
+							<Text
+								p="6px"
+								w="550px"
+								ml={2}
+								border="1px"
+								borderRadius="base"
+								borderColor="cyan.400"
+								cursor="pointer"
+								_hover={{
+									backgroundColor: 'cyan.50',
+									color: 'gray.700'
+								}}
+							>
+								Lorem ipsum dolor sit amet consectetur adipis elit. Eaque veniam amet shjui
+							</Text>
+						</Flex>
+					</Box>
+					<Box w="200px" mx="auto" mt={2}>
+						<Button colorScheme="cyan" color="gray.100" borderRadius="full" size="sm" w="100%">
+							Next <BsArrowRightShort color="white" size="20px" />
+						</Button>
+					</Box>
 				</Box>
 			</Box>
 		</Flex>
