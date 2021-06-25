@@ -24,7 +24,7 @@ const AppRouter = () => {
 			<Route path="/creator/:creatorId">
 				<CreatorDashboard />
 			</Route>
-			<Route path="/quiz/:quizId">
+			<Route path="/quizzes/:quizId">
 				<QuizTaking />
 			</Route>
 		</Switch>
