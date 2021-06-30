@@ -2,7 +2,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from '../components/Home';
 import CreatorDashboard from '../components/CreatorDashboard';
 import Login from '../components/Login';
-import QuizTaking from '../components/QuizTaking';
+import QuizTaking from '../components/TakingQuiz/QuizTaking';
 import Signup from '../components/Signup';
 import CreateNewQuizPage from '../components/QuizCreation/CreateNewQuizPage';
 
