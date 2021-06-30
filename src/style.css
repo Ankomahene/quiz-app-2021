@@ -1,0 +1,5 @@
+@import "/node_modules/react-component-countdown-timer/lib/styles.css";
+
+.timer {
+    font-weight: bold;
+}

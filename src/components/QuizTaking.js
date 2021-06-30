@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Button, Text, Flex, Progress } from '@chakra-ui/react';
 import { BsArrowRightShort } from 'react-icons/bs';
 import { optionsLabels } from './QuizCreation/NewQuizQuestion';
+import CountdownTimer from 'react-component-countdown-timer';
 
 const exampleQuiz = {
 	name: 'Sample Quiz Name',
@@ -43,22 +44,22 @@ const exampleQuiz = {
 			options: [
 				{
 					id: '456789',
-					optionText: 'Option 1',
+					optionText: 'Option A',
 					status: false
 				},
 				{
 					id: '1000789',
-					optionText: 'Option 2',
+					optionText: 'Option B',
 					status: true
 				},
 				{
 					id: '9886789',
-					optionText: 'Option 3',
+					optionText: 'Option C',
 					status: false
 				},
 				{
 					id: '45632229',
-					optionText: 'Option 4',
+					optionText: 'Option D',
 					status: false
 				}
 			]
@@ -69,6 +70,15 @@ const exampleQuiz = {
 const QuizTaking = () => {
 	const [ quiz ] = useState(exampleQuiz);
 	const [ currentQuestion, setCurrentQuestion ] = useState(0);
+
+	const handleNextQuestion = () => {
+		setCurrentQuestion(value => value + 1);
+	};
+
+	const handleTimeUp = () => {
+		console.log('time up');
+	};
+
 	return (
 		<Flex alignItems="center" justifyContent="center" flexDir="column" h="92vh" bg="gray.100">
 			<Box>
@@ -80,7 +90,14 @@ const QuizTaking = () => {
 						<Flex alignItems="center" shadow="base" borderRadius="2xl" p={2}>
 							<Text>Time Left:</Text>
 							<Text fontSize="xl" color="cyan.500" mx={3} fontWeight="bold">
-								{quiz.duration}
+								<CountdownTimer
+									count={2345}
+									className="timer"
+									color="#3BB6C7"
+									hideDay
+									onEnd={handleTimeUp}
+								/>
+								{/* {quiz.duration} */}
 							</Text>
 						</Flex>
 						<Flex alignItems="center" shadow="base" borderRadius="2xl" p={2}>
@@ -88,7 +105,7 @@ const QuizTaking = () => {
 								<Progress hasStripe colorScheme="cyan" value={10} />
 							</Box>
 							<Text fontSize="xl" mx={3} fontWeight="bold">
-								1/10
+								{currentQuestion + 1}/{quiz.questions.length}
 							</Text>
 						</Flex>
 					</Flex>
@@ -114,78 +131,26 @@ const QuizTaking = () => {
 										color: 'gray.700'
 									}}
 								>
-									Lorem ipsum dolor sit amet consectetur adipis elit. Eaque veniam amet shjui
+									{option.optionText}
 								</Text>
 							</Flex>
 						))}
-
-						<Flex alignItems="center" my={3}>
-							<Text fontSize="lg" fontWeight="bold">
-								B
-							</Text>
-							<Text
-								p="6px"
-								w="550px"
-								ml={2}
-								border="1px"
-								bg="cyan.600"
-								color="white"
-								borderRadius="base"
-								borderColor="cyan.400"
-								cursor="pointer"
-								_hover={{
-									backgroundColor: 'cyan.50',
-									color: 'gray.700'
-								}}
-							>
-								Lorem ipsum dolor sit amet consectetur adipis elit.
-							</Text>
-						</Flex>
-						<Flex alignItems="center" my={3}>
-							<Text fontSize="lg" fontWeight="bold">
-								C
-							</Text>
-							<Text
-								p="6px"
-								w="550px"
-								ml={2}
-								border="1px"
-								borderRadius="base"
-								borderColor="cyan.400"
-								cursor="pointer"
-								_hover={{
-									backgroundColor: 'cyan.50',
-									color: 'gray.700'
-								}}
-							>
-								Lorem ipsum dolor sit amet consectetur adipis elit. Eaque
-							</Text>
-						</Flex>
-						<Flex alignItems="center" my={3}>
-							<Text fontSize="lg" fontWeight="bold">
-								D
-							</Text>
-							<Text
-								p="6px"
-								w="550px"
-								ml={2}
-								border="1px"
-								borderRadius="base"
-								borderColor="cyan.400"
-								cursor="pointer"
-								_hover={{
-									backgroundColor: 'cyan.50',
-									color: 'gray.700'
-								}}
-							>
-								Lorem ipsum dolor sit amet consectetur adipis elit. Eaque veniam amet shjui
-							</Text>
-						</Flex>
 					</Box>
 					<Box w="200px" mx="auto" mt={2}>
-						<Button colorScheme="cyan" color="gray.100" borderRadius="full" size="sm" w="100%">
-							Next <BsArrowRightShort color="white" size="20px" />
-						</Button>
+						{currentQuestion === quiz.questions.length - 1 ? (
+							'End of Questions'
+						) : (
+							<Button
+								onClick={handleNextQuestion}
+								colorScheme="cyan"
+								color="gray.100"
+								borderRadius="full"
+								size="sm"
+								w="100%"
+							>
+								Next <BsArrowRightShort color="white" size="20px" />
+							</Button>
+						)}
 					</Box>
 				</Box>
 			</Box>
